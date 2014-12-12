@@ -1,0 +1,52 @@
+MCP2515 Transmit Summary
+------------------------
+3 identical transmit buffers - 14 bytes of registers each - we'll only use 1 buffer
+1 control register
+5 address & arbitration registers
+8 data registers
+NOTE: TXB0SIDH, TXB0SIDL, TXB0DLC must be written to transmit. Obv, also write data and ID
+Must initialize CANINTE.TXInE
+
+MCP2515 Transmit Process (high level)
+-------------------------------------
+Write address
+Write data
+(if more data, repeat)
+Write "send" command: TXB0CTRL.TXREQ to 1 or pull TX0RTS pin low
+
+SPI MESSAGE FORMAT
+------------------
+(instruction type)
+(reg address)
+(data to be written to the registers)
+
+SPI MESSAGE EXAMPLE (human-readable)
+------------------------------------
+WRITE
+TXB0CTRL
+0x0F
+
+SPI MESSAGE EXAMPLE (binary)
+----------------------------
+00000010
+00110000
+00001111
+
+OUR CAN ADDRESSES
+-----------------
+CAN accepts an 11-bit message ID. This is used for message arbitration and for determining which node to send it to.
+We are using the highest 6 bits for a "message type". These types are internally defined by REVO (000000 is critical message, 000001 is warning message, 000011 is voltage low, etc). Lower message IDs get higher priority on CAN so message types are sorted accondingly.
+We are using the lowest 5 bits for the "node ID" (the address we want to send to). These addresses are also defined internally by REVO - for example, 00100 is the hall effect node.
+
+CAN ADDRESS EXAMPLE
+-------------------
+Let's say we want to send a "voltage low" type message (0x4) to the Hall Effect node (0x3).
+0x4 -> 00100
+0x3 -> 000011
+
+The address is constructed like this:
+ (msg)|(node)
+ vlow | hall
+000011|00100
+
+or without the | separator: 00001100100
