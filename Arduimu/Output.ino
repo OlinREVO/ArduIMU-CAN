@@ -24,6 +24,11 @@ void printdata(void)
 		Serial.print (",");
 	#endif
       
+        #if PRINT_TIME == 1
+               Serial.print("Time");
+               Serial.print(millis());
+        #endif
+      
 	#if PRINT_DCM == 1
 		Serial.print ("EX0:");
 		Serial.print(convert_to_dec(DCM_Matrix[0][0]));

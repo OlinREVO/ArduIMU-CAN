@@ -18,6 +18,9 @@
 #include <FastSerial.h>   // ArduPilot Fast Serial Library
 #include <AP_GPS.h>     // ArduPilot GPS library
 
+#include "mcp_can.h" //CAN Headers, allows us to send messages through the MCP2515
+#include <SPI.h>
+
 
 //baud rate is 38400
 
@@ -53,6 +56,7 @@
 #define OUTPUTMODE 1
 
 #define PRINT_DCM 0     //Will print the whole direction cosine matrix
+#define PRINT_TIME 1 //Will print current millis since start of loop
 #define PRINT_ANALOGS 1 //Will print the analog raw data
 #define PRINT_EULER 1   //Will print the Euler angles Roll, Pitch and Yaw
 #define PRINT_GPS 1     //Will print GPS data
