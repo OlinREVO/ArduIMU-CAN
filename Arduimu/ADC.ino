@@ -5,19 +5,19 @@
 void Read_adc_raw(void)
 {
   int i;
-  uint16_t temp1;    
-  uint8_t temp2;    
-  
+  uint16_t temp1;
+  uint8_t temp2;
+
   // ADC readings...
   for (i=0;i<6;i++)
     {
       do{
-        temp1= analog_buffer[sensors[i]];             // sensors[] maps sensors to correct order 
+        temp1= analog_buffer[sensors[i]];             // sensors[] maps sensors to correct order
         temp2= analog_count[sensors[i]];
         } while(temp1 != analog_buffer[sensors[i]]);  // Check if there was an ADC interrupt during readings...
-      
-      if (temp2>0) AN[i] = float(temp1)/float(temp2);     // Check for divide by zero 
-            
+
+      if (temp2>0) AN[i] = float(temp1)/float(temp2);     // Check for divide by zero
+
     }
   // Initialization for the next readings...
   for (int i=0;i<8;i++){
@@ -38,33 +38,33 @@ float read_adc(int select)
     Serial.print("!!!ADC:1,VAL:");
     Serial.print (temp);
     Serial.print (",TOW:");
-    Serial.print (GPS.time);  
+    Serial.print (GPS.time);
     Serial.println("***");
 #endif
 #if PERFORMANCE_REPORTING == 1
-    adc_constraints++;   
-#endif 
+    adc_constraints++;
+#endif
     }
     return constrain(temp,-900,900);             //Throw out nonsensical values
   } else {
-    temp = (AN[select]-AN_OFFSET[select]); 
+    temp = (AN[select]-AN_OFFSET[select]);
     if (abs(temp)>900) {
 #if PRINT_DEBUG != 0
     Serial.print("!!!ADC:2,VAL:");
     Serial.print (temp);
     Serial.print (",TOW:");
-    Serial.print (GPS.time);  
+    Serial.print (GPS.time);
     Serial.println("***");
-#endif    
-#if PERFORMANCE_REPORTING == 1
-    adc_constraints++; 
 #endif
-    } 
+#if PERFORMANCE_REPORTING == 1
+    adc_constraints++;
+#endif
+    }
     return constrain(temp,-900,900);
   }
 }
 
-//Activating the ADC interrupts. 
+//Activating the ADC interrupts.
 void Analog_Init(void)
 {
  ADCSRA|=(1<<ADIE)|(1<<ADEN);
@@ -78,7 +78,7 @@ void Analog_Reference(uint8_t mode)
 }
 
 //ADC interrupt vector, this piece of code
-//is executed everytime a convertion is done. 
+//is executed everytime a convertion is done.
 ISR(ADC_vect)
 {
   volatile uint8_t low, high;
@@ -102,12 +102,12 @@ ISR(ADC_vect)
 void Read_adc_raw()
 {
   MPU6000_Read();    // Read MPU6000 sensor values
-  AN[0] = gyroX;   
-  AN[1] = gyroY;
-  AN[2] = gyroZ;
-  AN[3] = accelX;
-  AN[4] = accelY;
-  AN[5] = accelZ;  
+  AN[0] = (uint8_t) gyroX;
+  AN[1] = (uint8_t) gyroY;
+  AN[2] = (uint8_t) gyroZ;
+  AN[3] = (uint8_t) accelX;
+  AN[4] = (uint8_t) accelY;
+  AN[5] = (uint8_t) accelZ;
 }
 
 // Returns an analog value with the offset corrected (calibrated value)

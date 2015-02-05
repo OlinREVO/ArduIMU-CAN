@@ -1,5 +1,5 @@
 /* ------------------------------- REVO CAN API -------------------------------
- * 
+ *
  * Author: Derek Redfern, Heather Boortz, Olin College REVO
  * Last modified: Fall 2013
  * Contact: redfern.derek@gmail.com
@@ -47,6 +47,7 @@
 #define NODE_demoNode1      ((uint8_t) 0xC)
 #define NODE_demoNode2      ((uint8_t) 0xD)
 #define NODE_demoNode3      ((uint8_t) 0xE)
+#define NODE_arduIMU		((uint8_t) 0x6)
 
 #define MSG_critical        ((uint8_t) 0x0)
 #define MSG_warning         ((uint8_t) 0x1)

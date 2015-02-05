@@ -1,4 +1,4 @@
-// Released under Creative Commons License 
+// Released under Creative Commons License
 // Code by Jordi Munoz and William Premerlani, Supported by Chris Anderson and Doug Weibel
 // Version 1.0 for flat board updated by Doug Weibel, Jose Julio and Ahmad Byagowi
 // Version 1.7 includes support for SCP1000 absolute pressure sensor
@@ -40,9 +40,9 @@
 #define GPS_CONNECTION 0 // 0 for GPS pins, 1 for programming pins
 
 // GPS Type Selection - Note Ublox or MediaTek is recommended.  Support for NMEA is limited.
-#define GPS_PROTOCOL 3    // 1 - NMEA,  2 - EM406,  3 - Ublox, 4 -- MediaTek  
+#define GPS_PROTOCOL 3    // 1 - NMEA,  2 - EM406,  3 - Ublox, 4 -- MediaTek
 
-// Enable Air Start uses Remove Before Fly flag - connection to pin 6 on ArduPilot 
+// Enable Air Start uses Remove Before Fly flag - connection to pin 6 on ArduPilot
 #define ENABLE_AIR_START 0  //  1 if using airstart/groundstart signaling, 0 if not
 #define GROUNDSTART_PIN 8    //  Pin number used for ground start signal (recommend 10 on v1 and 8 on v2 hardware)
 
@@ -69,8 +69,8 @@
 #define PERFORMANCE_REPORTING 1  //Will include performance reports in the binary output ~ 1/2 min
 
 /* Support for optional magnetometer (1 enabled, 0 dissabled) */
-#define USE_MAGNETOMETER 1 // use 1 if you want to make yaw gyro drift corrections using the optional magnetometer   
- 
+#define USE_MAGNETOMETER 1 // use 1 if you want to make yaw gyro drift corrections using the optional magnetometer
+
 // Local magnetic declination (in degrees)
 // I use this web : http://www.ngdc.noaa.gov/geomagmodels/Declination.jsp
 #define MAGNETIC_DECLINATION -14.5    // corrects magnetic bearing to true north for NEEDHAM, MA
@@ -80,7 +80,7 @@
 #define MAG_OFFSET_Z 0
 
 /* Support for optional barometer (1 enabled, 0 dissabled) */
-#define USE_BAROMETER 0   // use 1 if you want to get altitude using the optional absolute pressure sensor                  
+#define USE_BAROMETER 0   // use 1 if you want to get altitude using the optional absolute pressure sensor
 #define ALT_MIX 50      // For binary messages: GPS or barometric altitude.  0 to 100 = % of barometric.  For example 75 gives 25% GPS alt and 75% baro
 
 //**********************************************************************
@@ -114,7 +114,7 @@ AP_GPS_MTK    GPS(&Serial);
 // ADC : Voltage reference 3.3v / 10bits(1024 steps) => 3.22mV/ADC step
 // ADXL335 Sensitivity(from datasheet) => 330mV/g, 3.22mV/ADC step => 330/3.22 = 102.48
 // Tested value : 101
-#define GRAVITY 101 //this equivalent to 1G in the raw data coming from the accelerometer 
+#define GRAVITY 101 //this equivalent to 1G in the raw data coming from the accelerometer
 #define Accel_Scale(x) x*(GRAVITY/9.81)//Scaling the raw data of the accel to actual acceleration in meters for seconds square
 
 // LPR530 & LY530 Sensitivity (from datasheet) => 3.33mV/º/s, 3.22mV/ADC step => 1.03
@@ -133,7 +133,7 @@ AP_GPS_MTK    GPS(&Serial);
 #define BLUE_LED_PIN 6
 #define YELLOW_LED_PIN 5   // Yellow led is not used on ArduIMU v3
 // MPU6000 4g range => g = 4096
-#define GRAVITY 4096  // This equivalent to 1G in the raw data coming from the accelerometer 
+#define GRAVITY 4096  // This equivalent to 1G in the raw data coming from the accelerometer
 #define Accel_Scale(x) x*(GRAVITY/9.81)//Scaling the raw data of the accel to actual acceleration in meters for seconds square
 
 // MPU6000 sensibility  (theorical 0.0152 => 1/65.6LSB/deg/s at 500deg/s) (theorical 0.0305 => 1/32.8LSB/deg/s at 1000deg/s) ( 0.0609 => 1/16.4LSB/deg/s at 2000deg/s)
@@ -162,10 +162,10 @@ float G_Dt=0.02;    // Integration time (DCM algorithm)
 long timeNow=0; // Hold the milliseond value for now
 long timer=0;   //general purpuse timer
 long timer_old;
-long timer24=0; //Second timer used to print values 
+long timer24=0; //Second timer used to print values
 boolean groundstartDone = false;    // Used to not repeat ground start
 
-float AN[8]; //array that store the 6 ADC filtered data
+uint8_t AN[8]; //array that store the 6 ADC filtered data
 float AN_OFFSET[8]; //Array that stores the Offset of the gyros
 
 float Accel_Vector[3]= {0,0,0}; //Store the acceleration in a vector
@@ -182,9 +182,9 @@ float yaw;
 
 int toggleMode=0;
 
-float errorRollPitch[3]= {0,0,0}; 
+float errorRollPitch[3]= {0,0,0};
 float errorYaw[3]= {0,0,0};
-float errorCourse=180; 
+float errorCourse=180;
 float COGX=0; //Course overground X axis
 float COGY=1; //Course overground Y axis
 
@@ -198,7 +198,7 @@ float DCM_Matrix[3][3]= {
     0,1,0  }
   ,{
     0,0,1  }
-}; 
+};
 float Update_Matrix[3][3]={{0,1,2},{3,4,5},{6,7,8}}; //Gyros here
 
 float Temporary_Matrix[3][3]={
@@ -209,7 +209,7 @@ float Temporary_Matrix[3][3]={
   ,{
     0,0,0  }
 };
- 
+
 // Startup GPS variables
 int gps_fix_count = 5;    //used to count 5 good fixes at ground startup
 
@@ -224,18 +224,18 @@ volatile uint8_t analog_count[8];
   uint8_t sensors[6] = {0,2,1,3,5,4};   // Use these two lines for Hardware v1 (w/ daughterboards)
   int SENSOR_SIGN[]= {1,-1,1,-1,1,-1,-1,-1,-1};  //Sensor: GYROX, GYROY, GYROZ, ACCELX, ACCELY, ACCELZ
  #endif
- 
+
  #if BOARD_VERSION == 2
   uint8_t sensors[6] = {6,7,3,0,1,2};  // For Hardware v2 flat
   int SENSOR_SIGN[] = {1,-1,-1,1,-1,1,-1,-1,-1};
  #endif
- 
+
  #if BOARD_VERSION == 3
   uint8_t sensors[6] = {0,1,2,3,4,5};  // For Hardware v3 (MPU6000)
   int SENSOR_SIGN[] = {1,-1,-1,-1,1,1,-1,1,-1};
  #endif
- 
- 
+
+
  // Performance Monitoring variables
  // Data collected and reported for ~1/2 minute intervals
  #if PERFORMANCE_REPORTING == 1
@@ -249,7 +249,7 @@ volatile uint8_t analog_count[8];
  long perf_mon_timer = 0;
  #endif
  unsigned int imu_health = 65012;
- 
+
  #if USE_MAGNETOMETER==1
  // Magnetometer variables definition
  #if BOARD_VERSION < 3
@@ -266,12 +266,14 @@ volatile uint8_t analog_count[8];
 
 //Starting CAN
 MCP_CAN CAN(10);
-unsigned char stmp[8] = {0, 1, 2, 3, 4, 5, 6, 7};
+uint8_t stmp[8] = {0, 1, 2, 3, 4, 5, 6, 7};
+uint8_t msg1[8];
+uint8_t msg2[8];
 
 //*****************************************************************************************
 
 void setup()
-{ 
+{
   Serial.begin(38400, 128, 16);
   pinMode(SERIAL_MUX_PIN,OUTPUT); //Serial Mux
   if (GPS_CONNECTION == 0){
@@ -285,11 +287,11 @@ void setup()
   pinMode(YELLOW_LED_PIN,OUTPUT); // Yellow LED
   pinMode(GROUNDSTART_PIN,INPUT);  // Remove Before Fly flag (pin 6 on ArduPilot)
   digitalWrite(GROUNDSTART_PIN,HIGH);
-  
+
   #if BOARD_VERSION == 3
   MPU6000_Init();       // MPU6000 initialization
   #endif
-  
+
   digitalWrite(RED_LED_PIN,HIGH);
   delay(500);
   digitalWrite(BLUE_LED_PIN,HIGH);
@@ -301,26 +303,26 @@ void setup()
   digitalWrite(BLUE_LED_PIN,LOW);
   delay(500);
   digitalWrite(YELLOW_LED_PIN,LOW);
-  
+
   #if BOARD_VERSION < 3
   Analog_Reference(EXTERNAL);//Using external analog reference
   Analog_Init();
   #endif
-  
+
   debug_print("Welcome...");
-  
+
   #if BOARD_VERSION == 1
   debug_print("You are using Hardware Version 1...");
-  #endif 
- 
+  #endif
+
   #if BOARD_VERSION == 2
   debug_print("You are using Hardware Version 2...");
-  #endif 
-  
+  #endif
+
   GPS.init();     // GPS Initialization
-  
+
   debug_handler(0);   //Printing version
-  
+
   #if USE_MAGNETOMETER == 1
     #if BOARD_VERSION < 3       // Support for old magnetometer (HMC5843) on ArduIMU v2
       APM_Compass.Init(); // I2C initialization
@@ -340,8 +342,8 @@ void setup()
       debug_handler(2);
       startup_ground();
   }
- 
-  if(CAN.begin(CAN_500KBPS) ==CAN_OK)  //check the Seeeduino CAN-BUS wiki for more details on code
+
+  if(CAN.begin(CAN_20KBPS) ==CAN_OK)  //check the Seeeduino CAN-BUS wiki for more details on code
   {
     Serial.print("can init ok!!\r\n");
       for (int i = 0; i < 9; i = i + 1)
@@ -349,15 +351,15 @@ void setup()
         Serial.print(i);
       }
   }
-  else Serial.print("Can init fail!!\r\n");  
+  else Serial.print("Can init fail!!\r\n");
 
 
   delay(250);
-    
+
   Read_adc_raw();     // ADC initialization
   timer=millis();
   delay(20);
-  
+
 }
 
 
@@ -365,16 +367,14 @@ void setup()
 //***************************************************************************************
 void loop() //Main Loop
 {
-  
-  CAN.sendMsgBuf(0x00, 0, 8, stmp);
-  delay(1000);  //
+
   timeNow = millis();
- 
+
   if((timeNow-timer)>=20)  // Main loop runs at 50Hz
   {
     timer_old = timer;
     timer = timeNow;
-  
+
 #if PERFORMANCE_REPORTING == 1
     mainLoop_count++;
     if (timer-timer_old > G_Dt_max) G_Dt_max = timer-timer_old;
@@ -383,19 +383,19 @@ void loop() //Main Loop
     G_Dt = (timer-timer_old)/1000.0;    // Real time of loop run. We use this on the DCM algorithm (gyro integration time)
     if(G_Dt > 1)
         G_Dt = 0;  //Something is wrong - keeps dt from blowing up, goes to zero to keep gyros from departing
-    
+
     // *** DCM algorithm
-   
+
     Read_adc_raw();
 
-    Matrix_update(); 
+    Matrix_update();
 
     Normalize();
 
     Drift_correction();
-   
+
     Euler_angles();
-    
+
     //Serial.print(timer-timer_old);
     //Serial.print("\t");
     //Serial.print(ToDeg(roll));
@@ -404,7 +404,7 @@ void loop() //Main Loop
     //Serial.print("\t");
     //Serial.print(ToDeg(yaw));
     //Serial.println();
-    
+
     #if PRINT_BINARY == 1
       printdata(); //Send info via serial
     #endif
@@ -416,12 +416,12 @@ void loop() //Main Loop
 #if PERFORMANCE_REPORTING == 1
       gyro_sat_count++;
 #endif
-      digitalWrite(RED_LED_PIN,HIGH);  
+      digitalWrite(RED_LED_PIN,HIGH);
     }
-    
+
   cycleCount++;
 
-        // Do these things every 6th time through the main cycle 
+        // Do these things every 6th time through the main cycle
         // This section gets called every 1000/(20*6) = 8 1/3 Hz
         // doing it this way removes the need for another 'millis()' call
     // and balances the processing load across main loop cycles.
@@ -429,35 +429,35 @@ void loop() //Main Loop
       case(0):
         GPS.update();
         break;
-        
+
       case(1):
         //Here we will check if we are getting a signal to ground start
-        if(digitalRead(GROUNDSTART_PIN) == LOW && groundstartDone == false) 
+        if(digitalRead(GROUNDSTART_PIN) == LOW && groundstartDone == false)
           startup_ground();
         break;
-        
+
       case(2):
-        
+
         break;
-        
+
       case(3):
         #if USE_MAGNETOMETER==1
                                   #if BOARD_VERSION < 3
             APM_Compass.Read();     // Read magnetometer
-            APM_Compass.Calculate(roll,pitch);  // Calculate heading 
+            APM_Compass.Calculate(roll,pitch);  // Calculate heading
                                   #endif
                                   #if BOARD_VERSION == 3
                                     HMC5883_read();                   // Read magnetometer
-                                    HMC5883_calculate(roll, pitch);   // Calculate heading 
+                                    HMC5883_calculate(roll, pitch);   // Calculate heading
                                   #endif
         #endif
         break;
-      
+
       case(4):
         // Display Status on LEDs
         // GYRO Saturation indication
         if(gyro_sat>=1) {
-          digitalWrite(RED_LED_PIN,HIGH); //Turn Red LED when gyro is saturated. 
+          digitalWrite(RED_LED_PIN,HIGH); //Turn Red LED when gyro is saturated.
           if(gyro_sat>=8)  // keep the LED on for 8/10ths of a second
             gyro_sat=0;
           else
@@ -465,20 +465,20 @@ void loop() //Main Loop
         } else {
           digitalWrite(RED_LED_PIN,LOW);
         }
-      
+
         // YAW drift correction indication
         if(GPS.ground_speed<SPEEDFILT*100) {
           digitalWrite(YELLOW_LED_PIN,HIGH);    //  Turn on yellow LED if speed too slow and yaw correction supressed
         } else {
           digitalWrite(YELLOW_LED_PIN,LOW);
         }
-      
+
         // GPS Fix indication
                                 switch (GPS.status()) {
                                         case(2):
-                digitalWrite(BLUE_LED_PIN,HIGH);  //Turn Blue LED when gps is fixed. 
+                digitalWrite(BLUE_LED_PIN,HIGH);  //Turn Blue LED when gps is fixed.
                                               break;
-                                              
+
                                         case(1):
                                               if (GPS.valid_read == true){
                                                     toggleMode = abs(toggleMode-1); // Toggle blue light on and off to indicate NMEA sentences exist, but no GPS fix lock
@@ -490,15 +490,15 @@ void loop() //Main Loop
                                                     GPS.valid_read = false;
                                               }
                                               break;
-                                              
+
                                         default:
                                               digitalWrite(BLUE_LED_PIN,LOW);
                                               break;
         }
         break;
-        
+
       case(5):
-                                
+
         cycleCount = -1;
     // Reset case counter, will be incremented to zero before switch statement
         #if !PRINT_BINARY
@@ -506,10 +506,10 @@ void loop() //Main Loop
         #endif
         break;
     }
-     
-  
+
+
 #if PERFORMANCE_REPORTING == 1
-    if (timeNow-perf_mon_timer > 20000) 
+    if (timeNow-perf_mon_timer > 20000)
     {
       printPerfData(timeNow-perf_mon_timer);
       perf_mon_timer=timeNow;
@@ -518,6 +518,11 @@ void loop() //Main Loop
 
   }
 
+  stmp = AN;
+  //stmp = uint8_t(0);
+  CAN.sendMsgBuf(0x6, 0, 8, stmp);
+
+
 }
 
 //********************************************************************************
@@ -525,10 +530,10 @@ void startup_ground(void)
 {
   uint16_t store=0;
   int flashcount = 0;
- 
+
   debug_handler(2);
   for(int c=0; c<ADC_WARM_CYCLES; c++)
-  { 
+  {
     digitalWrite(YELLOW_LED_PIN,LOW);
     digitalWrite(BLUE_LED_PIN,HIGH);
     digitalWrite(RED_LED_PIN,LOW);
@@ -539,7 +544,7 @@ void startup_ground(void)
     digitalWrite(RED_LED_PIN,HIGH);
     delay(50);
   }
-  
+
   Read_adc_raw();
   delay(20);
   Read_adc_raw();
@@ -565,14 +570,14 @@ void startup_ground(void)
       digitalWrite(RED_LED_PIN,HIGH);
     }
     flashcount++;
-    
+
         }
   digitalWrite(RED_LED_PIN,LOW);
   digitalWrite(BLUE_LED_PIN,LOW);
   digitalWrite(YELLOW_LED_PIN,LOW);
-  
+
   AN_OFFSET[5]-=GRAVITY*SENSOR_SIGN[5];
-  
+
   for(int y=0; y<=5; y++)
   {
     Serial.println(AN_OFFSET[y]);
@@ -583,7 +588,7 @@ void startup_ground(void)
                 store = AN_OFFSET[y];
                 #endif
     eeprom_busy_wait();
-    eeprom_write_word((uint16_t *)  (y*2+2), store);  
+    eeprom_write_word((uint16_t *)  (y*2+2), store);
   }
 
   while (gps_fix_count > 0 && USE_BAROMETER) {
@@ -615,16 +620,16 @@ void startup_air(void)
     #endif
     #if BOARD_VERSION == 3
     AN_OFFSET[y] = temp;
-    #endif  
+    #endif
     Serial.println(AN_OFFSET[y]);
   }
   Serial.println("***Air Start complete");
-}    
+}
 
 
 void debug_print(char string[])
 {
-  #if PRINT_DEBUG != 0 
+  #if PRINT_DEBUG != 0
   Serial.print("???");
   Serial.print(string);
   Serial.println("***");
@@ -633,58 +638,58 @@ void debug_print(char string[])
 
 void debug_handler(byte message)
 {
-  #if PRINT_DEBUG != 0 
-  
+  #if PRINT_DEBUG != 0
+
   static unsigned long BAD_Checksum=0;
-  
-  switch(message) 
+
+  switch(message)
   {
     case 0:
 //    Serial.print("???Software Version ");
 //    Serial.print(SOFTWARE_VER);
 //    Serial.println("***");
     break;
-      
+
     case 1:
     Serial.println("???Air Start!***");
     break;
-      
+
     case 2:
     Serial.println("???Ground Start!***");
-    break;      
-      
+    break;
+
     case 3:
     Serial.println("???Enabling Magneto...***");
-    break;  
-    
+    break;
+
     case 4:
     Serial.println("???Enabling Pressure Altitude...***");
-    break;         
-    
-    case 5:
-    Serial.println("???Air Start complete");  
-    break;     
-    
-    case 6:
-    Serial.println("???Ground Start complete"); 
     break;
-     
+
+    case 5:
+    Serial.println("???Air Start complete");
+    break;
+
+    case 6:
+    Serial.println("???Ground Start complete");
+    break;
+
     case 10:
     BAD_Checksum++;
-    Serial.print("???GPS Bad Checksum: "); 
+    Serial.print("???GPS Bad Checksum: ");
     Serial.print(BAD_Checksum);
     Serial.println("...***");
     break;
-      
+
     default:
     Serial.println("???Invalid debug ID...***");
     break;
-   
+
   }
   #endif
-  
+
 }
-   
+
 /*
 EEPROM memory map
 
@@ -701,7 +706,7 @@ EEPROM memory map
 10 0x0A   AN_OFFSET[4]
 11 0x0B   ..
 12 0x0C   AN_OFFSET[5]
-13 0x0D   ..  
+13 0x0D   ..
 14 0x0E   Unused
 15 0x0F   ..
 
