@@ -343,7 +343,7 @@ void setup()
       startup_ground();
   }
 
-  if(CAN.begin(CAN_20KBPS) ==CAN_OK)  //check the Seeeduino CAN-BUS wiki for more details on code
+  if(CAN.begin(CAN_31K25BPS) ==CAN_OK)  //check the Seeeduino CAN-BUS wiki for more details on code
   {
     Serial.print("can init ok!!\r\n");
       for (int i = 0; i < 9; i = i + 1)
@@ -518,7 +518,7 @@ void loop() //Main Loop
 
   }
 
-  stmp = AN;
+  memcpy(stmp, AN, 8);
   //stmp = uint8_t(0);
   CAN.sendMsgBuf(0x6, 0, 8, stmp);
 

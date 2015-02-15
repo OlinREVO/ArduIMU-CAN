@@ -77,7 +77,7 @@ $(OUTDIR):
 
 # download to mcu flash
 flash: $(OUTDIR)/$(TARGET).hex
-	$(AVRDUDE) $(AVRDUDE_FLAGS) -U flash:w:$<
+	$(AVRDUDE) $(AVRDUDE_FLAGS) -Uflash:w:$<
 
 # verify mcu flash
 verify: $(OUTDIR)/$(TARGET).hex
@@ -85,3 +85,6 @@ verify: $(OUTDIR)/$(TARGET).hex
 
 clean:
 	-$(RM) -r $(OUTDIR)/*
+
+#these are default fuses (H:FF, E:DF, L:62)
+#changed fuses to (H:FF, E:DF, L:22) to output clk on pin32
