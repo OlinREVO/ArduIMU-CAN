@@ -89,3 +89,11 @@ clean:
 #these are default fuses (H:FF, E:DF, L:62)
 #changed fuses to (H:FF, E:DF, L:22) to output clk on pin32
 #command is:  sudo avrdude -p atmega16m1 -v -c avrispmkII -P usb -U lfuse:w:0x22:m -U hfuse:w:0xff:m -U efuse:w:0xdf:m
+
+
+#ArduIMU default fuses are:
+#avrdude: safemode: Fuses OK (H:05, E:DA, L:FF)
+
+sudo avrdude -p atmega328p -v -c avrispmkII -P usb -U lfuse:w:0xff:m -U hfuse:w:0x05:m -U efuse:w:0xda:m
+
+#We changed fuses to: sudo avrdude -p atmega328p -v -c avrispmkII -P usb -U lfuse:w:0xa0:m -U hfuse:w:0xd9:m -U efuse:w:0xff:m

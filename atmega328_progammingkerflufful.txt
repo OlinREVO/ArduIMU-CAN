@@ -1,0 +1,496 @@
+sophie@sophie-computer:~/Documents/REVO/ArduIMU-CAN$ sudo avrdude -p atmega328p -v -c avrispmkII -P usb -U lfuse:w:0xbf:m -U hfuse:w:0x85:m -U efuse:w:0xfc:m
+
+avrdude: Version 6.0.1, compiled on Oct 21 2013 at 15:55:32
+         Copyright (c) 2000-2005 Brian Dean, http://www.bdmicro.com/
+         Copyright (c) 2007-2009 Joerg Wunsch
+
+         System wide configuration file is "/etc/avrdude.conf"
+         User configuration file is "/home/sophie/.avrduderc"
+
+         Using Port                    : usb
+         Using Programmer              : avrispmkII
+avrdude: usbdev_open(): Found AVRISP mkII, serno: 000200224281
+         AVR Part                      : ATmega328P
+         Chip Erase delay              : 9000 us
+         PAGEL                         : PD7
+         BS2                           : PC2
+         RESET disposition             : dedicated
+         RETRY pulse                   : SCK
+         serial program mode           : yes
+         parallel program mode         : yes
+         Timeout                       : 200
+         StabDelay                     : 100
+         CmdexeDelay                   : 25
+         SyncLoops                     : 32
+         ByteDelay                     : 0
+         PollIndex                     : 3
+         PollValue                     : 0x53
+         Memory Detail                 :
+
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           eeprom        65    20     4    0 no       1024    4      0  3600  3600 0xff 0xff
+           flash         65     6   128    0 yes     32768  128    256  4500  4500 0xff 0xff
+           lfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           hfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           efuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           lock           0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           calibration    0     0     0    0 no          1    0      0     0     0 0x00 0x00
+           signature      0     0     0    0 no          3    0      0     0     0 0x00 0x00
+
+         Programmer Type : STK500V2
+         Description     : Atmel AVR ISP mkII
+         Programmer Model: AVRISP mkII
+         Hardware Version: 1
+         Firmware Version Master : 1.23
+         Vtarget         : 4.8 V
+         SCK period      : 8.00 us
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: Unknown status 0x00
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~/Documents/REVO/ArduIMU-CAN$ sudo avrdude -p atmega328p -v -c avrispmkII -P usb -U lfuse:w:0xbf:m -U hfuse:w:0x85:m -U efuse:w:0xfc:m
+
+avrdude: Version 6.0.1, compiled on Oct 21 2013 at 15:55:32
+         Copyright (c) 2000-2005 Brian Dean, http://www.bdmicro.com/
+         Copyright (c) 2007-2009 Joerg Wunsch
+
+         System wide configuration file is "/etc/avrdude.conf"
+         User configuration file is "/home/sophie/.avrduderc"
+
+         Using Port                    : usb
+         Using Programmer              : avrispmkII
+avrdude: usbdev_open(): Found AVRISP mkII, serno: 000200224281
+         AVR Part                      : ATmega328P
+         Chip Erase delay              : 9000 us
+         PAGEL                         : PD7
+         BS2                           : PC2
+         RESET disposition             : dedicated
+         RETRY pulse                   : SCK
+         serial program mode           : yes
+         parallel program mode         : yes
+         Timeout                       : 200
+         StabDelay                     : 100
+         CmdexeDelay                   : 25
+         SyncLoops                     : 32
+         ByteDelay                     : 0
+         PollIndex                     : 3
+         PollValue                     : 0x53
+         Memory Detail                 :
+
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           eeprom        65    20     4    0 no       1024    4      0  3600  3600 0xff 0xff
+           flash         65     6   128    0 yes     32768  128    256  4500  4500 0xff 0xff
+           lfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           hfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           efuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           lock           0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           calibration    0     0     0    0 no          1    0      0     0     0 0x00 0x00
+           signature      0     0     0    0 no          3    0      0     0     0 0x00 0x00
+
+         Programmer Type : STK500V2
+         Description     : Atmel AVR ISP mkII
+         Programmer Model: AVRISP mkII
+         Hardware Version: 1
+         Firmware Version Master : 1.23
+         Vtarget         : 4.8 V
+         SCK period      : 8.00 us
+
+avrdude: AVR device initialized and ready to accept instructions
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: Device signature = 0x1e950f
+avrdude: safemode: lfuse reads as A0
+avrdude: safemode: hfuse reads as D9
+avrdude: safemode: efuse reads as 7
+avrdude: reading input file "0xbf"
+avrdude: writing lfuse (1 bytes):
+
+Writing | ################################################## | 100% 0.01s
+
+avrdude: 1 bytes of lfuse written
+avrdude: verifying lfuse memory against 0xbf:
+avrdude: load data lfuse data from input file 0xbf:
+avrdude: input file 0xbf contains 1 bytes
+avrdude: reading on-chip lfuse data:
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: verifying ...
+avrdude: 1 bytes of lfuse verified
+avrdude: reading input file "0x85"
+avrdude: writing hfuse (1 bytes):
+
+Writing | ################################################## | 100% 0.01s
+
+avrdude: 1 bytes of hfuse written
+avrdude: verifying hfuse memory against 0x85:
+avrdude: load data hfuse data from input file 0x85:
+avrdude: input file 0x85 contains 1 bytes
+avrdude: reading on-chip hfuse data:
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: verifying ...
+avrdude: 1 bytes of hfuse verified
+avrdude: reading input file "0xfc"
+avrdude: writing efuse (1 bytes):
+
+Writing |                                                    | 0% 0.00s ***failed;  
+Writing | ################################################## | 100% 0.03s
+
+avrdude: 1 bytes of efuse written
+avrdude: verifying efuse memory against 0xfc:
+avrdude: load data efuse data from input file 0xfc:
+avrdude: input file 0xfc contains 1 bytes
+avrdude: reading on-chip efuse data:
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: verifying ...
+avrdude: verification error, first mismatch at byte 0x0000
+         0x04 != 0xfc
+avrdude: verification error; content mismatch
+
+avrdude: safemode: lfuse reads as BF
+avrdude: safemode: hfuse reads as 85
+avrdude: safemode: efuse reads as 4
+avrdude: safemode: efuse changed! Was fc, and is now 4
+Would you like this fuse to be changed back? [y/n] 
+avrdude: safemode: Fuses OK (H:FC, E:85, L:BF)
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~/Documents/REVO/ArduIMU-CAN$ sudo avrdude -p atmega328p -v -c avrispmkII -P usb -U lfuse:w:0xbf:m -U hfuse:w:0x85:m -U efuse:w:0xfc:m
+
+avrdude: Version 6.0.1, compiled on Oct 21 2013 at 15:55:32
+         Copyright (c) 2000-2005 Brian Dean, http://www.bdmicro.com/
+         Copyright (c) 2007-2009 Joerg Wunsch
+
+         System wide configuration file is "/etc/avrdude.conf"
+         User configuration file is "/home/sophie/.avrduderc"
+
+         Using Port                    : usb
+         Using Programmer              : avrispmkII
+avrdude: usbdev_open(): Found AVRISP mkII, serno: 000200224281
+         AVR Part                      : ATmega328P
+         Chip Erase delay              : 9000 us
+         PAGEL                         : PD7
+         BS2                           : PC2
+         RESET disposition             : dedicated
+         RETRY pulse                   : SCK
+         serial program mode           : yes
+         parallel program mode         : yes
+         Timeout                       : 200
+         StabDelay                     : 100
+         CmdexeDelay                   : 25
+         SyncLoops                     : 32
+         ByteDelay                     : 0
+         PollIndex                     : 3
+         PollValue                     : 0x53
+         Memory Detail                 :
+
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           eeprom        65    20     4    0 no       1024    4      0  3600  3600 0xff 0xff
+           flash         65     6   128    0 yes     32768  128    256  4500  4500 0xff 0xff
+           lfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           hfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           efuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           lock           0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           calibration    0     0     0    0 no          1    0      0     0     0 0x00 0x00
+           signature      0     0     0    0 no          3    0      0     0     0 0x00 0x00
+
+         Programmer Type : STK500V2
+         Description     : Atmel AVR ISP mkII
+         Programmer Model: AVRISP mkII
+         Hardware Version: 1
+         Firmware Version Master : 1.23
+         Vtarget         : 4.8 V
+         SCK period      : 8.00 us
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: MOSI fail, SCK fail
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~/Documents/REVO/ArduIMU-CAN$ sudo avrdude -p atmega328p -v -c avrispmkII -P usb -U lfuse:w:0xff:m -U hfuse:w:0x05:m -U efuse:w:0xda:m
+
+avrdude: Version 6.0.1, compiled on Oct 21 2013 at 15:55:32
+         Copyright (c) 2000-2005 Brian Dean, http://www.bdmicro.com/
+         Copyright (c) 2007-2009 Joerg Wunsch
+
+         System wide configuration file is "/etc/avrdude.conf"
+         User configuration file is "/home/sophie/.avrduderc"
+
+         Using Port                    : usb
+         Using Programmer              : avrispmkII
+avrdude: usbdev_open(): Found AVRISP mkII, serno: 000200224281
+         AVR Part                      : ATmega328P
+         Chip Erase delay              : 9000 us
+         PAGEL                         : PD7
+         BS2                           : PC2
+         RESET disposition             : dedicated
+         RETRY pulse                   : SCK
+         serial program mode           : yes
+         parallel program mode         : yes
+         Timeout                       : 200
+         StabDelay                     : 100
+         CmdexeDelay                   : 25
+         SyncLoops                     : 32
+         ByteDelay                     : 0
+         PollIndex                     : 3
+         PollValue                     : 0x53
+         Memory Detail                 :
+
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           eeprom        65    20     4    0 no       1024    4      0  3600  3600 0xff 0xff
+           flash         65     6   128    0 yes     32768  128    256  4500  4500 0xff 0xff
+           lfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           hfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           efuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           lock           0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           calibration    0     0     0    0 no          1    0      0     0     0 0x00 0x00
+           signature      0     0     0    0 no          3    0      0     0     0 0x00 0x00
+
+         Programmer Type : STK500V2
+         Description     : Atmel AVR ISP mkII
+         Programmer Model: AVRISP mkII
+         Hardware Version: 1
+         Firmware Version Master : 1.23
+         Vtarget         : 4.8 V
+         SCK period      : 8.00 us
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: MOSI fail, SCK fail
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~/Documents/REVO/ArduIMU-CAN$ sudo avrdude -p atmega328p -v -c avrispmkII -P usb -U lfuse:w:0xff:m -U hfuse:w:0x05:m -U efuse:w:0xda:m
+
+avrdude: Version 6.0.1, compiled on Oct 21 2013 at 15:55:32
+         Copyright (c) 2000-2005 Brian Dean, http://www.bdmicro.com/
+         Copyright (c) 2007-2009 Joerg Wunsch
+
+         System wide configuration file is "/etc/avrdude.conf"
+         User configuration file is "/home/sophie/.avrduderc"
+
+         Using Port                    : usb
+         Using Programmer              : avrispmkII
+avrdude: usbdev_open(): Found AVRISP mkII, serno: 000200224281
+         AVR Part                      : ATmega328P
+         Chip Erase delay              : 9000 us
+         PAGEL                         : PD7
+         BS2                           : PC2
+         RESET disposition             : dedicated
+         RETRY pulse                   : SCK
+         serial program mode           : yes
+         parallel program mode         : yes
+         Timeout                       : 200
+         StabDelay                     : 100
+         CmdexeDelay                   : 25
+         SyncLoops                     : 32
+         ByteDelay                     : 0
+         PollIndex                     : 3
+         PollValue                     : 0x53
+         Memory Detail                 :
+
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           eeprom        65    20     4    0 no       1024    4      0  3600  3600 0xff 0xff
+           flash         65     6   128    0 yes     32768  128    256  4500  4500 0xff 0xff
+           lfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           hfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           efuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           lock           0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           calibration    0     0     0    0 no          1    0      0     0     0 0x00 0x00
+           signature      0     0     0    0 no          3    0      0     0     0 0x00 0x00
+
+         Programmer Type : STK500V2
+         Description     : Atmel AVR ISP mkII
+         Programmer Model: AVRISP mkII
+         Hardware Version: 1
+         Firmware Version Master : 1.23
+         Vtarget         : 4.8 V
+         SCK period      : 8.00 us
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: MOSI fail, SCK fail
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~/Documents/REVO/ArduIMU-CAN$ sudo avrdude -p atmega328p -v -c avrispmkII -P usb -U lfuse:w:0xff:m -U hfuse:w:0x05:m -U efuse:w:0xda:m
+
+avrdude: Version 6.0.1, compiled on Oct 21 2013 at 15:55:32
+         Copyright (c) 2000-2005 Brian Dean, http://www.bdmicro.com/
+         Copyright (c) 2007-2009 Joerg Wunsch
+
+         System wide configuration file is "/etc/avrdude.conf"
+         User configuration file is "/home/sophie/.avrduderc"
+
+         Using Port                    : usb
+         Using Programmer              : avrispmkII
+avrdude: usbdev_open(): Found AVRISP mkII, serno: 000200224281
+         AVR Part                      : ATmega328P
+         Chip Erase delay              : 9000 us
+         PAGEL                         : PD7
+         BS2                           : PC2
+         RESET disposition             : dedicated
+         RETRY pulse                   : SCK
+         serial program mode           : yes
+         parallel program mode         : yes
+         Timeout                       : 200
+         StabDelay                     : 100
+         CmdexeDelay                   : 25
+         SyncLoops                     : 32
+         ByteDelay                     : 0
+         PollIndex                     : 3
+         PollValue                     : 0x53
+         Memory Detail                 :
+
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           eeprom        65    20     4    0 no       1024    4      0  3600  3600 0xff 0xff
+           flash         65     6   128    0 yes     32768  128    256  4500  4500 0xff 0xff
+           lfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           hfuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           efuse          0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           lock           0     0     0    0 no          1    0      0  4500  4500 0x00 0x00
+           calibration    0     0     0    0 no          1    0      0     0     0 0x00 0x00
+           signature      0     0     0    0 no          3    0      0     0     0 0x00 0x00
+
+         Programmer Type : STK500V2
+         Description     : Atmel AVR ISP mkII
+         Programmer Model: AVRISP mkII
+         Hardware Version: 1
+         Firmware Version Master : 1.23
+         Vtarget         : 4.8 V
+         SCK period      : 8.00 us
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: MOSI fail, SCK fail
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+
+================================================================
+
+sophie@sophie-computer:~$ sudo avrdude -c avrispmkii -p atmega328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
+[sudo] password for sophie: 
+
+avrdude: AVR device initialized and ready to accept instructions
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: Device signature = 0x1e950f
+avrdude: reading lfuse memory:
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: writing output file "<stdout>"
+0xff
+avrdude: reading hfuse memory:
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: writing output file "<stdout>"
+0xda
+avrdude: reading efuse memory:
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: writing output file "<stdout>"
+0x5
+
+avrdude: safemode: Fuses OK (H:05, E:DA, L:FF)
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~$ sudo avrdude -c avrispmkii -p atmega328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: Unknown status 0x00
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~$ sudo avrdude -c avrispmkii -p atmega328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: Unknown status 0x00
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~$ sudo avrdude -c avrispmkii -p atmega328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: MOSI fail, SCK fail
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~$ sudo avrdude -c avrispmkii -p atmega328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: MOSI fail, SCK fail, Target reverse inserted
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~$ sudo avrdude -c avrispmkii -p atmega328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
+
+avrdude: stk500v2_command(): command failed
+avrdude: stk500v2_program_enable(): bad AVRISPmkII connection status: MOSI fail, RST fail, SCK fail, Target reverse inserted
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+
+avrdude done.  Thank you.
+
+sophie@sophie-computer:~$ 
+

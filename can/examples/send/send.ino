@@ -8,7 +8,7 @@ void setup()
 {
   Serial.begin(115200);
   // init can bus, baudrate: 500k
-  if(CAN0.begin(CAN_500KBPS) == CAN_OK) Serial.print("can init ok!!\r\n");
+  if(CAN0.begin(CAN_31K25BPS) == CAN_OK) Serial.print("can init ok!!\r\n");
   else Serial.print("Can init fail!!\r\n");
 }
 
