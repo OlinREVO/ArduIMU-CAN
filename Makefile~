@@ -77,7 +77,7 @@ $(OUTDIR):
 
 # download to mcu flash
 flash: $(OUTDIR)/$(TARGET).hex
-	$(AVRDUDE) $(AVRDUDE_FLAGS) -Uflash:w:$<
+	$(AVRDUDE) $(AVRDUDE_FLAGS) -Uflash:w:$< #-U lfuse:w:0x22:m -U hfuse:w:0xff:m -U efuse:w:0xdf:m
 
 # verify mcu flash
 verify: $(OUTDIR)/$(TARGET).hex
@@ -89,3 +89,4 @@ clean:
 #these are default fuses (H:FF, E:DF, L:62)
 #changed fuses to (H:FF, E:DF, L:22) to output clk on pin32
 #command is:  sudo avrdude -p atmega16m1 -v -c avrispmkII -P usb -U lfuse:w:0x22:m -U hfuse:w:0xff:m -U efuse:w:0xdf:m
+

@@ -4,7 +4,7 @@
 // Sample call: initCAN(NODE_speedometer);
 int initCAN(uint8_t nodeID) {
     sei(); // enable global interrupts
-    
+
     CANGCON = _BV(SWRES); //Software reset
     CANTCON = 0x00; //CAN timing prescaler set to 0;
 
@@ -128,7 +128,7 @@ int sendCANmsg(uint8_t destID, uint8_t msgID, uint8_t msg[], uint8_t msgLength) 
 
     // set compatibility registers, RTR bit, and reserved bit to 0
     CANIDT4 = 0;
-    CANIDT3 = 0;
+  CANIDT3 = 0;
 
     // set ID tag registers
     uint16_t idtag = ((destID & 0x1F) << 6) | (msgID & 0x3F);
@@ -165,7 +165,7 @@ ISR(CAN_INT_vect) {
     } else {
         CANSTMOB &= 0; // unknown interrupt
     }
-    
+
     SREG=cSREG; //restore SREG
 }
 
@@ -174,6 +174,6 @@ ISR(CAN_INT_vect) {
  *  will be called from an ISR and will delay your main loop
 
 void handleCANmsg(uint8_t destID, uint8_t msgID, char* msg, uint8_t msgLen) {
-    
+
 }
 */

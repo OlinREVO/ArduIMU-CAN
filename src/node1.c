@@ -32,7 +32,7 @@ void buttonScript(int target, int val, uint8_t x, uint8_t y){
     } else {
         msg[0] = y; // turn top LED off
     }
-    sendCANmsg(target, MSG_demoMsg, msg, 1);  
+    sendCANmsg(target, MSG_demoMsg, msg, 1);
     SREG = cSREG;
 }
 
@@ -88,12 +88,13 @@ int main (void) {
     //DDRB &= ~(_BV(PB2)); // set pin 16 for input
     DDRC &= ~(_BV(PC0)); // set pin 30 for input
     DDRD &= ~(_BV(PD6)); // set pin 14 for input
-  
+
     // Setting PE1 and PE2. XTAL1 to input and XTAL2 to ouput . Pins 10 and 11
-    DDRE |= _BV(PE2);
+    //Don't need external oscillators, these can be commented out
+    /*DDRE |= _BV(PE2);
     DDRE &= ~(_BV(PE1));
-    
-    sei(); // enable global interrupts    
+    */
+    sei(); // enable global interrupts
     initCAN(NODE_HOME); // initialize CAN bus
     initButton(); // intitialize button interrupts
 

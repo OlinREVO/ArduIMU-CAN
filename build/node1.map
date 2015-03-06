@@ -3,7 +3,7 @@ Archive member included because of file (symbol)
 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
                               /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm16m1.o (exit)
 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
-                              build/imu.o (__do_copy_data)
+                              build/node1.o (__do_copy_data)
 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
                               build/uart.o (__do_clear_bss)
 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
@@ -36,7 +36,7 @@ Linker script and memory map
 
 Address of section .data set to 0x800100
 LOAD /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm16m1.o
-LOAD build/imu.o
+LOAD build/node1.o
 LOAD build/uart.o
 LOAD build/api.o
 START GROUP
@@ -135,7 +135,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x796
+.text           0x0000000000000000      0x8be
  *(.vectors)
  .vectors       0x0000000000000000       0x7c /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm16m1.o
                 0x0000000000000000                __vectors
@@ -206,7 +206,6 @@ END GROUP
                 0x00000000000000b6                __vector_13
                 0x00000000000000b6                __vector_17
                 0x00000000000000b6                __vector_19
-                0x00000000000000b6                __vector_7
                 0x00000000000000b6                __vector_27
                 0x00000000000000b6                __vector_5
                 0x00000000000000b6                __vector_4
@@ -218,77 +217,81 @@ END GROUP
                 0x00000000000000b6                __vector_8
                 0x00000000000000b6                __vector_26
                 0x00000000000000b6                __vector_14
-                0x00000000000000b6                __vector_10
                 0x00000000000000b6                __vector_16
- .text          0x00000000000000ba       0x26 build/imu.o
-                0x00000000000000ba                handleCANmsg
- .text          0x00000000000000e0      0x1de build/uart.o
-                0x00000000000000e0                initUART
-                0x0000000000000140                endUART
-                0x000000000000015a                __vector_20
-                0x00000000000001e6                UART_transmit
-                0x0000000000000250                UART_putString
- .text          0x00000000000002be      0x26e build/api.o
-                0x00000000000002be                initCAN
-                0x0000000000000350                readMsg
-                0x0000000000000408                sendCANmsg
-                0x0000000000000492                __vector_18
- .text          0x000000000000052c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
- .text          0x000000000000052c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
- .text          0x000000000000052c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .text          0x000000000000052c        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
-                0x000000000000052c                . = ALIGN (0x2)
+ .text          0x00000000000000ba      0x148 build/node1.o
+                0x00000000000000ba                initButton
+                0x00000000000000ca                buttonScript
+                0x00000000000000fc                __vector_7
+                0x0000000000000156                __vector_10
+                0x00000000000001b0                handleCANmsg
+                0x00000000000001d6                reset
+ .text          0x0000000000000202      0x1de build/uart.o
+                0x0000000000000202                initUART
+                0x0000000000000262                endUART
+                0x000000000000027c                __vector_20
+                0x0000000000000308                UART_transmit
+                0x0000000000000372                UART_putString
+ .text          0x00000000000003e0      0x26e build/api.o
+                0x00000000000003e0                initCAN
+                0x0000000000000472                readMsg
+                0x000000000000052a                sendCANmsg
+                0x00000000000005b4                __vector_18
+ .text          0x000000000000064e        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .text          0x000000000000064e        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+ .text          0x000000000000064e        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .text          0x000000000000064e        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x000000000000064e                . = ALIGN (0x2)
  *(.text.*)
- .text.startup  0x000000000000052c       0x18 build/imu.o
-                0x000000000000052c                main
+ .text.startup  0x000000000000064e       0x1e build/node1.o
+                0x000000000000064e                main
  .text.libgcc.mul
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
- .text.libgcc   0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.div
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
- .text.libgcc   0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc   0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.prologue
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.builtins
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.fmul
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.fixed
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.mul
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.div
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .text.libgcc   0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.prologue
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.builtins
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.fmul
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
-                0x0000000000000544        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x000000000000066c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.avr-libc
-                0x0000000000000544      0x24e /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
-                0x0000000000000544                malloc
-                0x0000000000000674                free
-                0x0000000000000792                . = ALIGN (0x2)
+                0x000000000000066c      0x24e /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x000000000000066c                malloc
+                0x000000000000079c                free
+                0x00000000000008ba                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000000000000792        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
-                0x0000000000000792                exit
-                0x0000000000000792                _exit
+ .fini9         0x00000000000008ba        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000008ba                exit
+                0x00000000000008ba                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -307,65 +310,66 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000000000000792        0x4 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .fini0         0x00000000000008ba        0x4 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x0000000000000796                _etext = .
+                0x00000000000008be                _etext = .
 
-.data           0x0000000000800100        0x8 load address 0x0000000000000796
+.data           0x0000000000800100        0xa load address 0x00000000000008be
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm16m1.o
- .data          0x0000000000800100        0x2 build/imu.o
-                0x0000000000800100                NODE_HOME
- .data          0x0000000000800102        0x0 build/uart.o
- .data          0x0000000000800102        0x0 build/api.o
- .data          0x0000000000800102        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
- .data          0x0000000000800102        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
- .data          0x0000000000800102        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .data          0x0000000000800102        0x6 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
-                0x0000000000800102                __malloc_heap_end
-                0x0000000000800104                __malloc_heap_start
-                0x0000000000800106                __malloc_margin
+ .data          0x0000000000800100        0x4 build/node1.o
+                0x0000000000800100                NODE_TARGET_1
+                0x0000000000800102                NODE_HOME
+ .data          0x0000000000800104        0x0 build/uart.o
+ .data          0x0000000000800104        0x0 build/api.o
+ .data          0x0000000000800104        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .data          0x0000000000800104        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+ .data          0x0000000000800104        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .data          0x0000000000800104        0x6 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x0000000000800104                __malloc_heap_end
+                0x0000000000800106                __malloc_heap_start
+                0x0000000000800108                __malloc_margin
  *(.data*)
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x0000000000800108                . = ALIGN (0x2)
-                0x0000000000800108                _edata = .
-                0x0000000000800108                PROVIDE (__data_end, .)
+                0x000000000080010a                . = ALIGN (0x2)
+                0x000000000080010a                _edata = .
+                0x000000000080010a                PROVIDE (__data_end, .)
 
-.bss            0x0000000000800108        0xe
-                0x0000000000800108                PROVIDE (__bss_start, .)
+.bss            0x000000000080010a        0xe
+                0x000000000080010a                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x0000000000800108        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm16m1.o
- .bss           0x0000000000800108        0x0 build/imu.o
- .bss           0x0000000000800108        0x0 build/uart.o
- .bss           0x0000000000800108        0x0 build/api.o
- .bss           0x0000000000800108        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
- .bss           0x0000000000800108        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
- .bss           0x0000000000800108        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .bss           0x0000000000800108        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
+ .bss           0x000000000080010a        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm16m1.o
+ .bss           0x000000000080010a        0x0 build/node1.o
+ .bss           0x000000000080010a        0x0 build/uart.o
+ .bss           0x000000000080010a        0x0 build/api.o
+ .bss           0x000000000080010a        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .bss           0x000000000080010a        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+ .bss           0x000000000080010a        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .bss           0x000000000080010a        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
  *(.bss*)
  *(COMMON)
- COMMON         0x0000000000800108        0xa build/uart.o
-                0x0000000000800108                TX_end
-                0x000000000080010a                TX_write
-                0x000000000080010c                TX_read
-                0x000000000080010e                transmitting
-                0x0000000000800110                TX_begin
- COMMON         0x0000000000800112        0x4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
-                0x0000000000800112                __brkval
-                0x0000000000800114                __flp
-                0x0000000000800116                PROVIDE (__bss_end, .)
-                0x0000000000000796                __data_load_start = LOADADDR (.data)
-                0x000000000000079e                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x000000000080010a        0xa build/uart.o
+                0x000000000080010a                TX_end
+                0x000000000080010c                TX_write
+                0x000000000080010e                TX_read
+                0x0000000000800110                transmitting
+                0x0000000000800112                TX_begin
+ COMMON         0x0000000000800114        0x4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
+                0x0000000000800114                __brkval
+                0x0000000000800116                __flp
+                0x0000000000800118                PROVIDE (__bss_end, .)
+                0x00000000000008be                __data_load_start = LOADADDR (.data)
+                0x00000000000008c8                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0000000000800116        0x0
-                0x0000000000800116                PROVIDE (__noinit_start, .)
+.noinit         0x0000000000800118        0x0
+                0x0000000000800118                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x0000000000800116                PROVIDE (__noinit_end, .)
-                0x0000000000800116                _end = .
-                0x0000000000800116                PROVIDE (__heap_start, .)
+                0x0000000000800118                PROVIDE (__noinit_end, .)
+                0x0000000000800118                _end = .
+                0x0000000000800118                PROVIDE (__heap_start, .)
 
 .eeprom         0x0000000000810000        0x0
  *(.eeprom*)
@@ -386,21 +390,21 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x0000000000000000     0x23a0
+.stab           0x0000000000000000     0x2670
  *(.stab)
  .stab          0x0000000000000000      0x6cc /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm16m1.o
- .stab          0x00000000000006cc      0x66c build/imu.o
-                                        0x678 (size before relaxing)
- .stab          0x0000000000000d38      0x630 build/uart.o
+ .stab          0x00000000000006cc      0x93c build/node1.o
+                                        0x948 (size before relaxing)
+ .stab          0x0000000000001008      0x630 build/uart.o
                                         0x84c (size before relaxing)
- .stab          0x0000000000001368      0x780 build/api.o
+ .stab          0x0000000000001638      0x780 build/api.o
                                         0x99c (size before relaxing)
- .stab          0x0000000000001ae8      0x8b8 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
+ .stab          0x0000000000001db8      0x8b8 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(malloc.o)
                                         0x8e8 (size before relaxing)
 
-.stabstr        0x0000000000000000     0x11bf
+.stabstr        0x0000000000000000     0x128b
  *(.stabstr)
- .stabstr       0x0000000000000000     0x11bf /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm16m1.o
+ .stabstr       0x0000000000000000     0x128b /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm16m1.o
 
 .stab.excl
  *(.stab.excl)
@@ -416,7 +420,7 @@ END GROUP
 
 .comment        0x0000000000000000       0x11
  *(.comment)
- .comment       0x0000000000000000       0x11 build/imu.o
+ .comment       0x0000000000000000       0x11 build/node1.o
                                          0x12 (size before relaxing)
  .comment       0x0000000000000000       0x12 build/uart.o
  .comment       0x0000000000000000       0x12 build/api.o
@@ -470,5 +474,5 @@ END GROUP
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(build/imu.elf elf32-avr)
+OUTPUT(build/node1.elf elf32-avr)
 LOAD linker stubs
